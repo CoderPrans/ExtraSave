@@ -83,11 +83,10 @@ class Home extends Component {
             {this.state.flipkart.length
               ? this.state.flipkart.map(product => (
                   <Grid item key={product.productBaseInfoV1.productId}>
-                    <a
+                    <Link
+                      to={`/product/${product.productBaseInfoV1.productId}`}
                       className="productCard"
-                      href={product.productBaseInfoV1.productUrl}
                       style={{ textDecoration: "none" }}
-                      target="_blank"
                     >
                       <Card
                         style={{
@@ -98,12 +97,16 @@ class Home extends Component {
                         }}
                       >
                         <CardContent>
-                          <img
-                            className="productImg"
-                            src={product.productBaseInfoV1.imageUrls["200x200"]}
-                            alt={product.productBaseInfoV1.title}
-                            style={{ width: "inherit" }}
-                          />
+                          <div style={{ minHeight: "200px" }}>
+                            <img
+                              className="productImg"
+                              src={
+                                product.productBaseInfoV1.imageUrls["200x200"]
+                              }
+                              alt={product.productBaseInfoV1.title}
+                              style={{ width: "inherit" }}
+                            />
+                          </div>
                           <br />
                           <div style={{ padding: "1em 0" }}>
                             <Typography variant="title" gutterBottom>
@@ -139,7 +142,7 @@ class Home extends Component {
                           </div>
                         </CardContent>
                       </Card>
-                    </a>
+                    </Link>
                   </Grid>
                 ))
               : this.state.searching && (

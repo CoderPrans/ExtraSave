@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Landing from "./components/Landing";
 import { Button, AppBar, Toolbar, Grid } from "@material-ui/core";
 import logo from "./Capture.png";
+import Product from "./components/Product";
 // import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -48,6 +49,7 @@ class App extends Component {
           </AppBar>
           <Route path="/home" component={Home} />
           <Route path="/category" component={Landing} />
+          <Route path="/product/:id" component={Product} />
         </div>
       </Router>
     );
