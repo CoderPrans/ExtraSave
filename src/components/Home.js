@@ -72,7 +72,7 @@ class Home extends Component {
     return (
       <div>
         <Navigation search={this.searchStore} />
-        <div style={{ margin: "5em 0 1em 0", padding: "1em 2em" }}>
+        <div style={{ margin: "5.5em 0 1em 0", padding: "1em 2em" }}>
           <Grid
             container
             direction="row"

@@ -1,5 +1,25 @@
 import React, { Component } from "react";
-import { Button, Grid, Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Card,
+  CircularProgress,
+  CardContent,
+  Typography,
+  withStyles
+} from "@material-ui/core";
+
+const style = theme => ({
+  divBar: {
+    overflowX: "scroll",
+    whiteSpace: "nowrap",
+    background: "#333",
+    marginTop: "4em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "6.7em"
+    }
+  }
+});
 
 class Landing extends Component {
   constructor(props) {
@@ -38,16 +58,10 @@ class Landing extends Component {
 
   render() {
     console.log(this.state);
+    const { classes } = this.props;
     return (
       <div>
-        <div
-          style={{
-            overflowX: "scroll",
-            whiteSpace: "nowrap",
-            background: "#333",
-            marginTop: "4em"
-          }}
-        >
+        <div className={classes.divBar}>
           {this.state.categories &&
             this.state.categories.map((category, i) => (
               <Button
@@ -85,74 +99,75 @@ class Landing extends Component {
           alignItems="flex-start"
           style={{ background: "white" }}
         >
-          {this.state.catProducts.length
-            ? this.state.catProducts.map(product => (
-                <Grid item key={product.productBaseInfoV1.productId}>
-                  <a
-                    className="productCard"
-                    href={product.productBaseInfoV1.productUrl}
-                    style={{ textDecoration: "none" }}
-                    target="_blank"
+          {this.state.catProducts.length ? (
+            this.state.catProducts.map(product => (
+              <Grid item key={product.productBaseInfoV1.productId}>
+                <a
+                  className="productCard"
+                  href={product.productBaseInfoV1.productUrl}
+                  style={{ textDecoration: "none" }}
+                  target="_blank"
+                >
+                  <Card
+                    style={{
+                      width: "14em",
+                      boxShadow: "none",
+                      background: "inherit",
+                      textAlign: "center"
+                    }}
                   >
-                    <Card
-                      style={{
-                        width: "14em",
-                        boxShadow: "none",
-                        background: "inherit",
-                        textAlign: "center"
-                      }}
-                    >
-                      <CardContent>
-                        <img
-                          className="productImg"
-                          src={product.productBaseInfoV1.imageUrls["200x200"]}
-                          alt={product.productBaseInfoV1.title}
-                          style={{ width: "inherit" }}
-                        />
-                        <br />
-                        <div style={{ padding: "1em 0" }}>
-                          <Typography variant="title" gutterBottom>
-                            {product.productBaseInfoV1.title.slice(0, 20) +
-                              "... "}
-                          </Typography>
+                    <CardContent>
+                      <img
+                        className="productImg"
+                        src={product.productBaseInfoV1.imageUrls["200x200"]}
+                        alt={product.productBaseInfoV1.title}
+                        style={{ width: "inherit" }}
+                      />
+                      <br />
+                      <div style={{ padding: "1em 0" }}>
+                        <Typography variant="title" gutterBottom>
+                          {product.productBaseInfoV1.title.slice(0, 20) +
+                            "... "}
+                        </Typography>
 
-                          <Typography
-                            variant="subheading"
-                            style={{ color: "green" }}
-                            gutterBottom
-                          >
-                            &#8377;
-                            {product.productBaseInfoV1.flipkartSpecialPrice
-                              .amount
-                              ? product.productBaseInfoV1.flipkartSpecialPrice
-                                  .amount
-                              : null}
-                          </Typography>
-                          <Typography
-                            variant="body1"
-                            style={{ textDecoration: "line-through" }}
-                            gutterBottom
-                          >
-                            &#8377;
-                            {
-                              product.productBaseInfoV1.flipkartSellingPrice
+                        <Typography
+                          variant="subheading"
+                          style={{ color: "green" }}
+                          gutterBottom
+                        >
+                          &#8377;
+                          {product.productBaseInfoV1.flipkartSpecialPrice.amount
+                            ? product.productBaseInfoV1.flipkartSpecialPrice
                                 .amount
-                            }
-                          </Typography>
-                          <Typography variant="caption">
-                            {product.productBaseInfoV1.categoryPath}
-                          </Typography>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </a>
-                </Grid>
-              ))
-            : null}
+                            : null}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          style={{ textDecoration: "line-through" }}
+                          gutterBottom
+                        >
+                          &#8377;
+                          {
+                            product.productBaseInfoV1.flipkartSellingPrice
+                              .amount
+                          }
+                        </Typography>
+                        <Typography variant="caption">
+                          {product.productBaseInfoV1.categoryPath}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              </Grid>
+            ))
+          ) : (
+            <CircularProgress style={{ margin: "12em auto" }} size={70} />
+          )}
         </Grid>
       </div>
     );
   }
 }
 
-export default Landing;
+export default withStyles(style)(Landing);
