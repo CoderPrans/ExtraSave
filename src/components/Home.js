@@ -76,7 +76,7 @@ class Home extends Component {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justify="space-evenly"
             alignItems="flex-start"
             style={{ background: "white" }}
           >
@@ -107,38 +107,60 @@ class Home extends Component {
                               style={{ width: "inherit" }}
                             />
                           </div>
-                          <br />
                           <div style={{ padding: "1em 0" }}>
-                            <Typography variant="title" gutterBottom>
-                              {product.productBaseInfoV1.title.slice(0, 20) +
+                            <Typography variant="subheading" gutterBottom>
+                              {product.productBaseInfoV1.title.slice(0, 25) +
                                 "... "}
                             </Typography>
-
-                            <Typography
-                              variant="subheading"
-                              style={{ color: "green" }}
-                              gutterBottom
-                            >
-                              &#8377;
-                              {
-                                product.productBaseInfoV1.flipkartSpecialPrice
-                                  .amount
-                              }
-                            </Typography>
-                            <Typography
-                              variant="body1"
-                              style={{ textDecoration: "line-through" }}
-                              gutterBottom
-                            >
-                              &#8377;
-                              {
-                                product.productBaseInfoV1.flipkartSellingPrice
-                                  .amount
-                              }
-                            </Typography>
-                            <Typography variant="caption">
-                              {product.productBaseInfoV1.categoryPath}
-                            </Typography>
+                            <div>
+                              {Object.values(
+                                product.productBaseInfoV1.attributes
+                              ).map((value, i) => (
+                                <Typography
+                                  key={i}
+                                  variant="caption"
+                                  style={{
+                                    display: "inline-block",
+                                    marign: "0 0.6em"
+                                  }}
+                                >
+                                  {value}
+                                </Typography>
+                              ))}
+                            </div>
+                            <br />
+                            <div>
+                              <Typography
+                                variant="subheading"
+                                style={{
+                                  color: "green",
+                                  display: "inline-block",
+                                  margin: "0 0.4em"
+                                }}
+                                gutterBottom
+                              >
+                                &#8377;
+                                {
+                                  product.productBaseInfoV1.flipkartSpecialPrice
+                                    .amount
+                                }
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                style={{
+                                  textDecoration: "line-through",
+                                  display: "inline-block",
+                                  margin: "0 0.4em"
+                                }}
+                                gutterBottom
+                              >
+                                &#8377;
+                                {
+                                  product.productBaseInfoV1.flipkartSellingPrice
+                                    .amount
+                                }
+                              </Typography>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
