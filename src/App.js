@@ -1,26 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Home from "./components/Home";
+import Landing from "./components/Landing";
+import { Button, AppBar, Toolbar } from "@material-ui/core";
+import logo from "./Capture.png";
+// import Navigation from "./components/Navigation";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <AppBar position="fixed" style={{ background: "#077AD5" }}>
+            <Toolbar>
+              {" "}
+              <img src={logo} alt="logo" width={206} />
+              <Link to="/category">
+                <Button
+                  style={{ margin: "1em" }}
+                  variant="contained"
+                  color="primary"
+                >
+                  By Category
+                </Button>
+              </Link>
+              <Link to="/home">
+                <Button
+                  style={{ margin: "1em" }}
+                  variant="contained"
+                  color="primary"
+                >
+                  By Query
+                </Button>
+              </Link>
+            </Toolbar>
+          </AppBar>
+          <Route path="/home" component={Home} />
+          <Route path="/category" component={Landing} />
+        </div>
+      </Router>
     );
   }
 }
