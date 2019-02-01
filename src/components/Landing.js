@@ -131,7 +131,8 @@ class Landing extends Component {
                             src={product.productBaseInfoV1.imageUrls["200x200"]}
                             alt={product.productBaseInfoV1.title}
                             style={{
-                              width: "inherit"
+                              maxWidth: "100%",
+                              maxHeight: "100%"
                             }}
                           />
                         </div>
